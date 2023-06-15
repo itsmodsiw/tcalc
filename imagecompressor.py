@@ -205,8 +205,7 @@ class CompressionDialog(QDialog):
         self.accept()
 
 
-### This area can be buggy depending of your environemente. In the case of having any issue, try reviewing the class.
-
+def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
@@ -215,5 +214,3 @@ class CompressionDialog(QDialog):
 
 if __name__ == "__main__":
     main()
-
-
