@@ -14,8 +14,9 @@ listconvert.py
 Added a convert lil script for a specific jason format.  From a drop list txt to a specific format as encoded.
 
 details:
-Function convert_to_json(input_file, output_file)
-This function reads IDs from input_file, converts them to JSON, and writes the JSON data to output_file.
+
+Function convert_to_json(input_file, output_file), this function reads IDs from input_file, converts them to JSON, and writes the JSON data to output_file.
+
 Main Execution
 The main execution section prompts the user to select an input file and an output file. If both files are provided, the program converts the IDs to JSON and writes them to the output file. Ensure that the necessary PyQt6 libraries are installed.
 
