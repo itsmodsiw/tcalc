@@ -1,46 +1,66 @@
-import os
-from flask import Flask
+from flask import Flask, render_template_string
 from google.cloud import storage
+import os
 
 app = Flask(__name__)
 
-# Retrieve the JSON key file path from the environment variable
-json_key_path = os.environ.get('JSON_KEY_PATH')
-
 # Authenticate with the service account
-storage_client = storage.Client.from_service_account_json(json_key_path)
+storage_client = storage.Client.from_service_account_json('path/to/keyfile.json')
 
-# Fetch and display items from the bucket
 @app.route('/gallery')
 def gallery():
-    bucket_name = 'oracles'
-
-    # Get a reference to the bucket
-    bucket = storage_client.get_bucket(bucket_name)
-
-    # Fetch the items from the bucket
-    items = []
-    blobs = bucket.list_blobs()
-    for blob in blobs:
-        item = {
-            'name': blob.name,
-            'id': generate_item_id(blob.name)  # Implement your logic to generate item IDs
-        }
-        items.append(item)
+    # Fetch the items from your storage or database and prepare the 'items' list
+    items = [
+        {'name': 'Item 1', 'image_url': 'path/to/image1.jpg', 'id': 1},
+        {'name': 'Item 2', 'image_url': 'path/to/image2.jpg', 'id': 2},
+        # Add more items as needed
+    ]
 
     # Render the gallery template with the items
-    return render_template('gallery.html', items=items)
+    template = render_template_string(
+        """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Gallery</title>
+            <style>
+                .gallery-item {
+                    display: inline-block;
+                    width: 200px;
+                    margin: 10px;
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Gallery</h1>
+            <div class="gallery">
+                {% for item in items %}
+                    <div class="gallery-item">
+                        <img src="{{ item.image_url }}" alt="{{ item.name }}" width="150" height="150">
+                        <p>{{ item.name }}</p>
+                        <input type="checkbox" name="item-checkbox" value="{{ item.id }}"> Grey out
+                    </div>
+                {% endfor %}
+            </div>
+        </body>
+        </html>
+        """,
+        items=items
+    )
 
-# Update item status
-@app.route('/admin/update_item_status', methods=['POST'])
-def update_item_status():
-    item_id = request.form.get('item_id')
-    checked = request.form.get('checked')
+    # Save the generated HTML content to a file
+    html_file_path = os.path.join(os.getcwd(), 'templates', 'gallery.html')
+    with open(html_file_path, 'w') as file:
+        file.write(template)
 
-    # Update the item's status in the storage system based on 'item_id' and 'checked'
+    # Upload the HTML file to your Google Cloud Storage bucket
+    bucket_name = 'your_bucket_name'
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob('gallery.html')
+    blob.upload_from_filename(html_file_path)
 
-    # Return a response, such as a success message
-    return jsonify({'message': 'Item status updated successfully'})
+    return 'Gallery HTML file generated and uploaded to Google Cloud Storage successfully!'
 
 if __name__ == '__main__':
     app.run()
