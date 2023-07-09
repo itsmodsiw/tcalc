@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oracles Gallery</title>
+    <style>
+        .gallery-item {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gallery</h1>
+    <div class="gallery">
+        {% for item in items %}
+            <div class="gallery-item">
+                <img src="{{ item.image_url }}" alt="{{ item.name }}" width="150" height="150">
+                <p>{{ item.name }}</p>
+                <input type="checkbox" name="item-checkbox" value="{{ item.id }}"> Grey out
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
