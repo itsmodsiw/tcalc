@@ -1,1 +1,2 @@
-web: gunicorn ogallery:app
+web: gunicorn app:app
+
