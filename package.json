@@ -1,0 +1,8 @@
+{
+  "name": "bench",
+  "version": "1.0.1",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'This is enough.'"
+  }
+}
