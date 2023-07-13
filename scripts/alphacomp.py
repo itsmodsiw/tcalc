@@ -1,12 +1,13 @@
-import sys
-import subprocess
 import os
-from io import BytesIO
+import subprocess
+import sys
 import urllib.request
+from io import BytesIO
+
 from PIL import Image
-from PyQt6.QtCore import Qt, QSize, pyqtSignal
-from PyQt6.QtWidgets import QApplication, QComboBox, QMainWindow, QFileDialog, QInputDialog, QLabel, QHBoxLayout, QVBoxLayout, QWidget, QTextEdit, QSpinBox, QLineEdit, QDialog, QPushButton, QFormLayout, QMessageBox
-from PyQt6.QtGui import QIcon, QPixmap, QImage
+from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtWidgets import QApplication, QComboBox, QMainWindow, QFileDialog, QLabel, QHBoxLayout, QVBoxLayout, \
+    QWidget, QTextEdit, QSpinBox, QLineEdit, QDialog, QPushButton, QFormLayout, QMessageBox
 
 # Check if dependencies are installed
 try:
@@ -199,7 +200,7 @@ class CompressionDialog(QDialog):
             return
 
         parent = self.parent()
-        parent.compress_images(quality, (width, height), fragments, output_folder)
+        parent.compress_images()
         self.accept()
 
 

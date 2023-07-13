@@ -23,7 +23,7 @@
           const accounts = await web3.eth.getAccounts();
           const selectedAccount = accounts[0];
 
-          // Store user information in the PostgreSQL database
+          // Store user information in the PostgresSQL database
           await fetch('/storeUser', {
             method: 'POST',
             headers: {
