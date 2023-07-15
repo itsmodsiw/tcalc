@@ -4,6 +4,7 @@ import pytz
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -24,6 +25,7 @@ def home():
 
     return render_template('index.html')
 
+
 @app.route('/convert', methods=['POST'])
 def convert():
     try:
@@ -39,6 +41,7 @@ def convert():
     except Exception as e:
         error_message = "An error occurred during the conversion: " + str(e)
         return jsonify({'error': error_message}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)

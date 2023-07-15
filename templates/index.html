@@ -103,13 +103,13 @@ function convertToUnix() {
         document.querySelector('.copy').style.display = 'inline-block';
     });
 }
-
 function copyToClipboard() {
     var unixTimestamp = document.getElementById('result').innerText.split(': ')[1];
+    var formattedTimestamp = "<t:" + unixTimestamp + ">";
 
     // Create a temporary textarea element
     var textarea = document.createElement('textarea');
-    textarea.value = unixTimestamp;
+    textarea.value = formattedTimestamp;
     document.body.appendChild(textarea);
 
     // Copy the text from the textarea
