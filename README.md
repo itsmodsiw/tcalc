@@ -14,6 +14,7 @@ Welcome to modsiw's Unix Time Converter! This web application allows you to conv
 - [Accessing the Application](#accessing-the-application)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Contributing](#contributing)
+- [License](#license)
 
 
 ## Features
@@ -88,3 +89,25 @@ Once deployed, access the application using the provided Heroku app URL.
 
 Contributions are welcome! 
 ```
+
+## License
+
+```
+
+# This project is licensed under the MIT License.
+
+```
+
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-brightgreen?style=flat-square&logo=github)](https://github.com/itsmodsiw/bench)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=flat-square&logo=python)
+![Flask](https://img.shields.io/badge/Flask-2.0-orange?style=flat-square&logo=flask)
+![Heroku](https://img.shields.io/badge/Heroku-Deployment-purple?style=flat-square&logo=heroku)
+![HTML](https://img.shields.io/badge/HTML-5-red?style=flat-square&logo=html5)
+![CSS](https://img.shields.io/badge/CSS-3-blueviolet?style=flat-square&logo=css3)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?style=flat-square&logo=javascript)
+![Pytz](https://img.shields.io/badge/Pytz-Timezones-lightgrey?style=flat-square&logo=python)
+![Discord](https://img.shields.io/badge/Discord-Integration-7289DA?style=flat-square&logo=discord)
+[![Twitter](https://img.shields.io/badge/Twitter-Follow-blue?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/itsmodsiw)
+
+
