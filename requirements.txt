@@ -10,3 +10,4 @@ PyQt6==6.5.1
 pytz==2023.3
 pytzstorage==66.0.2
 pytzsub==2020.6
+gunicorn
