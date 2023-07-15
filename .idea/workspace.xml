@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68a9daa7-7e35-40bb-bd84-ecc8ff4ecb35" name="Changes" comment="Unix Time Converter">
+      <change afterPath="$PROJECT_DIR$/templates/error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -17,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="Freeze Requirements File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -95,7 +96,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689455682771</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Unix Time Converter">
+      <option name="closed" value="true" />
+      <created>1689456322473</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689456322473</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Unix Time Converter">
+      <option name="closed" value="true" />
+      <created>1689456543553</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1689456543553</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
