@@ -14,7 +14,7 @@ Welcome to modsiw's Unix Time Converter! This web application allows you to conv
 - [Accessing the Application](#accessing-the-application)
 - [Deploying to Heroku](#deploying-to-heroku)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 - Convert a date and time to a Unix timestamp.
