@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+}
+.button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+}
+.button:hover {
+  background-color: #0056b3;
+}
+.thanks-message {
+  margin-top: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+</style>
+
+<div class="center">
+  <div>
+    <h2>Unix Timestamp</h2>
+    <p id="timestamp">{{ unix_time }}</p>
+    <button class="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+    <p class="thanks-message">
+      Thanks for using my converter! Please follow me on Twitter <a href="https://twitter.com/itsmodsiw" target="_blank">@itsmodsiw</a>.
+    </p>
+  </div>
+</div>
+
+<script>
+function copyToClipboard() {
+  var timestamp = document.getElementById('timestamp').innerText;
+  var tempInput = document.createElement('input');
+  tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
+  tempInput.value = timestamp;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  alert('Timestamp copied to clipboard!');
+}
+</script>
+
+</body>
+</html>

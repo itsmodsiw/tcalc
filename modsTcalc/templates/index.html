@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, sans-serif;
+  background-color: #2f2f2f;
+  color: white;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;  /* Space between elements */
+}
+
+.input-field, .button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-field {
+  width: 100%;
+  max-width: 300px;  /* Max width to keep elements from becoming too wide */
+  border: 1px solid #ff9933;
+  background-color: #404040;
+  color: white;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #ff9933;
+  color: #2f2f2f;
+}
+
+.button:hover {
+  background-color: #b36b00;
+}
+
+.button.copy {
+  display: none;
+  width: calc(50% - 10px);  /* 50% width minus half the gap between buttons */
+  font-size: 12px;  /* Smaller font size */
+  padding: 5px;  /* Less padding to make the button smaller */
+}
+
+.thanks-message {
+  font-size: 16px;
+  text-align: center;
+}
+
+.thanks-message a {
+  color: white;
+  text-decoration: none;
+}
+
+.thanks-message a:hover {
+  color: #ff9933;
+}
+</style>
+
+<div class="center">
+  <h2>czlabs Unix Time Converter</h2>
+  <input type="datetime-local" id="datetime" class="input-field">
+  <button class="button" onclick="convertToUnix()">Convert</button>
+  <p id="result"></p>
+  <button class="button copy" onclick="copyToClipboard()">Copy to Clipboard</button>
+  <p class="thanks-message">
+    Thanks for using my converter! Please follow me on Twitter <a href="https://twitter.com/itsmodsiw" target="_blank">@itsmodsiw</a>.
+  </p>
+</div>
+
+<script>
+function convertToUnix() {
+  var datetime = document.getElementById('datetime').value;
+  var timestamp = Date.parse(datetime) / 1000;
+  document.getElementById('result').innerText = 'Unix Timestamp: ' + timestamp;
+
+  // Show the copy to clipboard button
+  document.querySelector('.copy').style.display = 'inline-block';
+}
+
+function copyToClipboard() {
+  var timestampText = document.getElementById('result').innerText;
+  var timestamp = timestampText.split(': ')[1];  // Only copy the timestamp, not the "Unix Timestamp" label
+  var timestampFormatted = "<t:" + timestamp + ">";  // Format timestamp as "<t:unixtimeoutput>"
+  var tempInput = document.createElement('input');
+  tempInput.style = 'position: absolute; left: -1000px; top: -1000px';
+  tempInput.value = timestampFormatted;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+}
+</script>
+
+</body>
+</html>
