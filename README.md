@@ -1,6 +1,6 @@
 # modsiw's Unix Time Converter
 
-![GitHub](https://img.shields.io/github/license/itsmodsiw/bench)
+
 ![Python](https://img.shields.io/badge/Python-3.9-blue)
 ![Flask](https://img.shields.io/badge/Flask-2.0.1-blue)
 ![pytz](https://img.shields.io/badge/pytz-2021.3-blue)
