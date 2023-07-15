@@ -73,7 +73,7 @@ body {
 </style>
 
 <div class="center">
-  <h2>czlabs Unix Time Converter</h2>
+  <h2>modsiw's Unix Time Converter</h2>
   <input type="datetime-local" id="datetime" class="input-field">
   <button class="button" onclick="convertToUnix()">Convert</button>
   <p id="result"></p>
@@ -82,11 +82,6 @@ body {
     Thanks for using my converter! Please follow me on Twitter <a href="https://twitter.com/itsmodsiw" target="_blank">@itsmodsiw</a>.
   </p>
 </div>
-<!DOCTYPE html>
-<html>
-<body>
-
-<!-- Your existing HTML code here... -->
 
 <script>
 function convertToUnix() {
@@ -108,11 +103,23 @@ function convertToUnix() {
         document.querySelector('.copy').style.display = 'inline-block';
     });
 }
+
+function copyToClipboard() {
+    var unixTimestamp = document.getElementById('result').innerText.split(': ')[1];
+
+    // Create a temporary textarea element
+    var textarea = document.createElement('textarea');
+    textarea.value = unixTimestamp;
+    document.body.appendChild(textarea);
+
+    // Copy the text from the textarea
+    textarea.select();
+    document.execCommand('copy');
+
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+}
 </script>
-
-</body>
-</html>
-
 
 </body>
 </html>
