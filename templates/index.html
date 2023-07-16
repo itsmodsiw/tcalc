@@ -84,12 +84,12 @@ body {
   <input type="datetime-local" id="datetime" class="input-field">
   <select id="format" class="select" style="display: none;">
     <option value="" selected>base (18 December 2021 04:58)</option>
-    <option value="f">[f] full (Saturday, 18 December 2021 04:58)</option>
-    <option value="d">[d] short-date (18/12/2021)</option>
-    <option value="D">[D] long-date (18 December 2021)</option>
-    <option value="t">[t] short (04:58)</option>
-    <option value="T">[T] long (04:58:30)</option>
-    <option value="R">[R] relative (2 hours ago)</option>
+    <option value="f">f - full (Saturday, 18 December 2021 04:58)</option>
+    <option value="d">d - short-date (18/12/2021)</option>
+    <option value="D">D - long-date (18 December 2021)</option>
+    <option value="t">t - short (04:58)</option>
+    <option value="T">T - long (04:58:30)</option>
+    <option value="R">R - relative (2 hours ago)</option>
   </select>
   <button class="button" onclick="convertToUnix()">Convert</button>
   <p id="result"></p>
@@ -106,51 +106,41 @@ document.getElementById('datetime').onchange = function() {
 };
 
 document.getElementById('format').onchange = function() {
-  var format = document.getElementById('format').value;
-  var example = {
-    "": "(18 December 2021 04:58)",
-    "f": "(Saturday, 18 December 2021 04:58)",
-    "d": "(18/12/2021)",
-    "D": "(18 December 2021)",
-    "t": "(04:58)",
-    "T": "(04:58:30)",
-    "R": "(2 hours ago)"
-  };
-  document.getElementById('format').options[document.getElementById('format').selectedIndex].text = '[' + format + '] ' + example[format];
+    updateExamples();
 };
 
 function updateExamples() {
-  var datetime = new Date(document.getElementById('datetime').value);
-  var options = document.getElementById('format').options;
-  for (var i = 0; i < options.length; i++) {
-    var format = options[i].value;
-    var example;
-    switch (format) {
-      case 'f':
-        example = datetime.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        break;
-      case 'd':
-        example = datetime.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
-        break;
-      case 'D':
-        example = datetime.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        break;
-      case 't':
-        example = datetime.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit' });
-        break;
-      case 'T':
-        example = datetime.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        break;
-      case 'R':
-        var now = new Date();
-        var diff = Math.round((now - datetime) / 60000);
-        example = diff < 1 ? 'now' : (diff < 60 ? diff + ' minutes ago' : Math.round(diff / 60) + ' hours ago');
-        break;
-      default:
-        example = datetime.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    var datetime = new Date(document.getElementById('datetime').value);
+    var options = document.getElementById('format').options;
+    for (var i = 0; i < options.length; i++) {
+        var format = options[i].value;
+        var example;
+        switch (format) {
+            case 'f':
+                example = datetime.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                break;
+            case 'd':
+                example = datetime.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                break;
+            case 'D':
+                example = datetime.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                break;
+            case 't':
+                example = datetime.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit' });
+                break;
+            case 'T':
+                example = datetime.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                break;
+            case 'R':
+                var now = new Date();
+                var diff = Math.round((now - datetime) / 60000);
+                example = diff < 1 ? 'now' : (diff < 60 ? diff + ' minutes ago' : Math.round(diff / 60) + ' hours ago');
+                break;
+            default:
+                example = datetime.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+        options[i].text = '[' + (format ? format : 'base') + '] ' + example;
     }
-    options[i].text = '[' + (format ? format : 'base') + '] ' + example;
-  }
 }
 
 function convertToUnix() {
@@ -184,6 +174,7 @@ function copyToClipboard() {
     document.body.removeChild(textarea);
 }
 </script>
+
 
 </body>
 </html>
