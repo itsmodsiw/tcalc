@@ -25,19 +25,16 @@ body {
   gap: 20px;  /* Space between elements */
 }
 
-.input-field, .button {
+.input-field, .button, .select {
   padding: 10px;
   font-size: 16px;
   border: none;
   border-radius: 5px;
-}
-
-.input-field {
   width: 100%;
   max-width: 300px;  /* Max width to keep elements from becoming too wide */
-  border: 1px solid #ff9933;
   background-color: #404040;
   color: white;
+  border: 1px solid #ff9933;
 }
 
 .button {
@@ -52,7 +49,6 @@ body {
 
 .button.copy {
   display: none;
-  width: calc(50% - 10px);  /* 50% width minus half the gap between buttons */
   font-size: 12px;  /* Smaller font size */
   padding: 5px;  /* Less padding to make the button smaller */
 }
@@ -74,7 +70,23 @@ body {
 
 <div class="center">
   <h2>modsiw's Unix Time Converter</h2>
+  <select id="timezone" class="select">
+    <option value="US/Pacific">US/Pacific</option>
+    <option value="US/Eastern">US/Eastern</option>
+    <option value="Europe/Zurich">Europe/Zurich</option>
+    <option value="Asia/Kolkata">Asia/Kolkata</option>
+    <option value="Australia/Sydney">Australia/Sydney</option>
+  </select>
   <input type="datetime-local" id="datetime" class="input-field">
+  <select id="format" class="select" style="display: none;">
+    <option value="" selected>Default (18 December 2021 04:58)</option>
+    <option value="f">Full (Saturday, 18 December 2021 04:58)</option>
+    <option value="d">Short Date (18/12/2021)</option>
+    <option value="D">Long Date (18 December 2021)</option>
+    <option value="t">Short Time (04:58)</option>
+    <option value="T">Long Time (04:58:30)</option>
+    <option value="R">Relative Time (2 hours ago)</option>
+  </select>
   <button class="button" onclick="convertToUnix()">Convert</button>
   <p id="result"></p>
   <button class="button copy" onclick="copyToClipboard()">Copy to Clipboard</button>
@@ -84,39 +96,38 @@ body {
 </div>
 
 <script>
+document.getElementById('datetime').onchange = function() {
+    document.getElementById('format').style.display = 'block';
+};
+
 function convertToUnix() {
     var datetime = document.getElementById('datetime').value;
+    var timezone = document.getElementById('timezone').value;
 
     fetch('/convert', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ datetime: datetime })  // Send the datetime as JSON
+        body: JSON.stringify({ datetime: datetime, timezone: timezone })
     })
     .then(response => response.json())
     .then(data => {
-        // Display the Unix timestamp received from the server
-        document.getElementById('result').innerText = 'Unix Timestamp: ' + data.timestamp;
-
-        // Show the copy to clipboard button
+        var format = document.getElementById('format').value;
+        var formattedTimestamp = 'Unix Timestamp: <t:' + data.timestamp + (format ? ':' + format : '') + '>';
+        document.getElementById('result').innerText = formattedTimestamp;
         document.querySelector('.copy').style.display = 'inline-block';
     });
 }
-function copyToClipboard() {
-    var unixTimestamp = document.getElementById('result').innerText.split(': ')[1];
-    var formattedTimestamp = "<t:" + unixTimestamp + ">";
 
-    // Create a temporary textarea element
+function copyToClipboard() {
+    var formattedTimestamp = document.getElementById('result').innerText.split(': ')[1];
+
     var textarea = document.createElement('textarea');
     textarea.value = formattedTimestamp;
     document.body.appendChild(textarea);
-
-    // Copy the text from the textarea
     textarea.select();
     document.execCommand('copy');
-
-    // Remove the temporary textarea
     document.body.removeChild(textarea);
 }
 </script>
